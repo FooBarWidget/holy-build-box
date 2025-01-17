@@ -34,12 +34,17 @@ jobs:
   build_pr:
     name: "Test Build Docker images"
     if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || ( github.event_name != 'create' && github.event_name != 'pull_request' && github.event_name != 'schedule' )
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         arch:
           - 'amd64'
           - 'arm64'
+        include:
+          - arch: 'amd64'
+            os: ubuntu-latest
+          - arch: 'arm64'
+            os: ubuntu-24.04-arm
     env:
       OWNER: '${{ github.repository_owner }}'
     steps:
@@ -68,12 +73,17 @@ jobs:
   build_release:
     name: "Build release Docker images"
     if: github.event_name == 'create' && github.event.ref_type == 'tag'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         arch:
           - 'amd64'
           - 'arm64'
+        include:
+          - arch: 'amd64'
+            os: ubuntu-latest
+          - arch: 'arm64'
+            os: ubuntu-24.04-arm
     env:
       TAG: ${{ github.event.ref }}
       OWNER: '${{ github.repository_owner }}'
