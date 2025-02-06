@@ -28,7 +28,7 @@ This variant is not suitable for compiling shared libraries because the provided
 
 ## `exe_gc_hardened`
 
-This variant is is meant for compiling applications, but with security hardening and dead-code elimination enabled. This variant is especially suitable for compiling applications for use in production environments.
+This variant is meant for compiling applications, but with security hardening and dead-code elimination enabled. This variant is especially suitable for compiling applications for use in production environments.
 
 See [Security hardening binaries](SECURITY-HARDENING-BINARIES.md) for more information about the security flags.
 
